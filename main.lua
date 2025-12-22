@@ -1,30 +1,40 @@
 function love.load()
-	x = 100
-	y = 50
-	move = true
+	listOfRectangles = {}
+end
 
-	fruits = { "apple", "banana" }
-	table.insert(fruits, "pear")
-	table.insert(fruits, "pineapple")
-	table.remove(fruits, 2)
-	fruits[1] = "tomato"
+function createRect()
+	local rect = {}
+	rect.x = 100
+	rect.y = 100
+	rect.width = 70
+	rect.height = 90
+
+	rect.speed = 100
+	table.insert(listOfRectangles, rect)
+end
+
+function love.keypressed(key)
+	if key == "space" then
+		createRect()
+	end
 end
 
 function love.update(dt)
-	if love.keyboard.isDown("right") then
-		x = x + 100 * dt
-	elseif love.keyboard.isDown("left") then
-		x = x - 100 * dt
-	elseif love.keyboard.isDown("down") then
-		y = y + 100 * dt
-	elseif love.keyboard.isDown("up") then
-		y = y - 100 * dt
+	for _, rect in ipairs(listOfRectangles) do
+		if love.keyboard.isDown("right") then
+			rect.x = rect.x + rect.speed * dt
+		elseif love.keyboard.isDown("left") then
+			rect.x = rect.x - rect.speed * dt
+		elseif love.keyboard.isDown("down") then
+			rect.y = rect.y + rect.speed * dt
+		elseif love.keyboard.isDown("up") then
+			rect.y = rect.y - rect.speed * dt
+		end
 	end
 end
 
 function love.draw()
-	love.graphics.rectangle("line", x, y, 200, 80)
-	for i, frt in ipairs(fruits) do
-		love.graphics.print(frt, x, y + 50 * i)
+	for _, rect in ipairs(listOfRectangles) do
+		love.graphics.rectangle("line", rect.x, rect.y, rect.width, rect.height)
 	end
 end
