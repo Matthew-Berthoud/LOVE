@@ -1,14 +1,20 @@
+local r1, r2
+
 function love.load()
-	x = 30
-	y = 50
-end
-function love.draw()
-	love.graphics.rectangle("line", x, y, 100, 100)
+	Object = require("classic")
+	require("shape")
+	require("rectangle")
+	require("circle")
+	r1 = Rectangle(100, 100, 200, 50)
+	r2 = Circle(350, 80, 40)
 end
 
-function love.keypressed(key)
-	if key == "space" then
-		x = math.random(100, 500)
-		y = math.random(100, 500)
-	end
+function love.update(dt)
+	r1:update(dt)
+	r2:update(dt)
+end
+
+function love.draw()
+	r1:draw()
+	r2:draw()
 end
