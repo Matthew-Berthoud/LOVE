@@ -1,10 +1,8 @@
 local r1, r2
 
 function love.load()
-	Object = require("classic")
-	require("shape")
-	require("rectangle")
-	require("circle")
+	local Rectangle = require("rectangle")
+	local Circle = require("circle")
 	r1 = Rectangle(100, 100, 200, 50)
 	r2 = Circle(350, 80, 40)
 end
